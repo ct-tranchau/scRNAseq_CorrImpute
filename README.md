@@ -15,7 +15,7 @@ The pipeline consists of four main steps:
 ## Installation
 ### Requirements
 - R (for correlation analysis)
-- Python 3.8+ (for deep learning-based imputation)
+- Python 3.7+ (for deep learning-based imputation)
 - Dependencies:
   - R packages: `tidyverse`,`dplyr`,  `Seurat`, `WGCNA`, `infotheo`, `CSCORE`, `hdf5r`, `optparse`
   - Python packages: `torch`, `numpy`, `pandas`, `argparse`
