@@ -38,7 +38,7 @@ This script calculates gene-gene correlations using various methods, including P
 
 #### **Run the script**
 ```bash
-Rscript 10_Correlation_comparisons.R --dataset_path </path/to/dataset.rds or /path/to/dataset.h5> --gene1 <gene1> --gene2 <gene2>
+Rscript 10_Correlation_comparisons.R --dataset_path <path/to/dataset.rds or /path/to/dataset.h5> --gene1 <gene1> --gene2 <gene2>
 ```
 
 ### **Arguments**
@@ -55,7 +55,7 @@ This script aggregates single-cell data into pseudo-bulk profiles by computing t
 
 #### **Run the script**
 ```bash
-Rscript 20_PseudoBulk_correlation.R --SeuratObj_path </path/to/dataset.rds> --gene1 <gene1> --gene2 <gene2>
+Rscript 20_PseudoBulk_correlation.R --SeuratObj_path <path/to/dataset.rds> --gene1 <gene1> --gene2 <gene2>
 ```
 ### **Arguments**
 - `--SeuratObj_path` → Path to the input data (**Seurat RDS file**)
@@ -73,7 +73,7 @@ This script uses a **Variational Autoencoder (VAE)** to impute missing values in
 
 #### **Run the script**
 ```bash
-python 30_VAE_imputation.py --input_path </path/to/readcount.csv> --output_path </path/to/output.csv>
+python 30_VAE_imputation.py --input_path <path/to/readcount.csv> --output_path <path/to/output.csv>
 ```
 ## **Arguments**
 - `--input_path` → Path to the expression matrix containing read count data (**CSV format**)
