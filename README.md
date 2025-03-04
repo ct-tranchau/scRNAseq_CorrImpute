@@ -124,4 +124,4 @@ This project is licensed under the **MIT License**.
 ## **Contact**
 For questions or issues, please contact:
 
-📧 [Your Email](tnchau@vt.edu)
+📧 [Your Email]:tnchau@vt.edu
