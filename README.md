@@ -36,7 +36,7 @@ pip install torch numpy pandas argparse
 ### **Step 1: Compute Gene-Gene Correlation (`10_correlation_method.R`)**
 This script calculates gene-gene correlations using various methods, including Pearson, Spearman, Kendall, Mutual Information, Euclidean Distance, Manhattan Distance, Chebyshev Distance, and CS-CORE. It supports multiple data types (raw read counts, normalized data, and scaled data) and can be applied to different subsets of the dataset: all cells in the sample, cells expressing both genes, or cells expressing either gene 1, gene 2, or both.
 
-#### **Run the script**
+### **Run the script**
 ```bash
 Rscript 10_Correlation_comparisons.R --dataset_path "path/to/dataset.rds or /path/to/dataset.h5" --gene1 "gene name" --gene2 "gene name"
 ```
@@ -53,7 +53,7 @@ Rscript 10_Correlation_comparisons.R --dataset_path "path/to/dataset.rds or /pat
 ### **Step 2: Perform PseudoBulk Correlation Analysis (`20_PseudoBulk_correlation.R`)**
 This script aggregates single-cell data into pseudo-bulk profiles by computing the average gene expression across all clusters. It then measures the correlation between the average expression levels of the selected genes across clusters.
 
-#### **Run the script**
+### **Run the script**
 ```bash
 Rscript 20_PseudoBulk_correlation.R --SeuratObj_path "path/to/dataset.rds" --gene1 "gene name" --gene2 "gene name"
 ```
@@ -71,18 +71,18 @@ Rscript 20_PseudoBulk_correlation.R --SeuratObj_path "path/to/dataset.rds" --gen
 ### **Step 3: Impute Data Using Variational Autoencoder (`30_VAE_imputation.py`)**
 This script uses a **Variational Autoencoder (VAE)** to impute missing values in single-cell RNA-seq data.
 
-#### **Run the script**
+### **Run the script**
 ```bash
 python 30_VAE_imputation.py --input_path "path/to/readcount.csv" --output_path "path/to/output.csv"
 ```
-## **Arguments**
+### **Arguments**
 - `--input_path` → Path to the expression matrix containing read count data (**CSV format**)
 - `--output_path` → Path to save the imputed dataset
 - `--epochs` *(optional)* → Number of training epochs (**default: 50**)
 - `--batch_size` *(optional)* → Batch size for training (**default: 64**)
 - `--lr` *(optional)* → Learning rate (**default: 0.0001**)
 
-## **Example with Custom Parameters**
+### **Example with Custom Parameters**
 ```bash
 python 30_VAE_imputation.py --input_path expression_matrix.csv --output_path VAE_impute.csv --epochs 50 --batch_size 64 --lr 0.0001
 ```
@@ -91,18 +91,18 @@ python 30_VAE_imputation.py --input_path expression_matrix.csv --output_path VAE
 ### **Step 4: Impute Data Using Autoencoder (`40_AE_imputation.py`)**
 This script uses a **Autoencoder (AE)** to impute missing values in single-cell RNA-seq data.
 
-#### **Run the script**
+### **Run the script**
 ```bash
 python 40_AE_imputation.py --input_path "path/to/readcount.csv" --output_path "path/to/output.csv"
 ```
-## **Arguments**
+### **Arguments**
 - `--input_path` → Path to the expression matrix containing read count data (**CSV format**)
 - `--output_path` → Path to save the imputed dataset
 - `--epochs` *(optional)* → Number of training epochs (**default: 50**)
 - `--batch_size` *(optional)* → Batch size for training (**default: 64**)
 - `--lr` *(optional)* → Learning rate (**default: 0.0001**)
 
-## **Example with Custom Parameters**
+### **Example with Custom Parameters**
 ```bash
 python 40_AE_imputation.py --input_path expression_matrix.csv --output_path AE_impute.csv --epochs 50 --batch_size 64 --lr 0.0001
 ```
