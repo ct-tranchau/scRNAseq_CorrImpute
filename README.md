@@ -50,15 +50,15 @@ Rscript 10_Correlation_comparisons.R --dataset_path "path/to/dataset.rds or /pat
 - `correlation_results.csv` → File containing the computed correlation values.
 
 
-### **Step 2: Perform PseudoBulk Correlation Analysis (`20_PseudoBulk_correlation.R`)**
-This script aggregates single-cell data into pseudo-bulk profiles by computing the average gene expression across all clusters. It then measures the correlation between the average expression levels of the selected genes across clusters.
+### **Step 2: Perform Pseudobulk Correlation Analysis (`20_PseudoBulk_correlation.R`)**
+This script aggregates single-cell data into pseudo-bulk profiles by computing the average gene expression across all cells in each cluster. It measures the correlation between the average expression levels of the selected genes across clusters.
 
 ### **Run the script**
 ```bash
 Rscript 20_PseudoBulk_correlation.R --SeuratObj_path "path/to/dataset.rds" --gene1 "gene name" --gene2 "gene name"
 ```
 ### **Arguments**
-- `--SeuratObj_path` → Path to the input data (**Seurat RDS file**)
+- `--SeuratObj_path` → Path to the input Seurat object data (**Seurat RDS file**)
 - `--gene1` → The name of Gene 1
 - `--gene2` → The name of Gene 2
 
