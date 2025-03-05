@@ -5,11 +5,13 @@ import torch.optim as optim
 import torch.utils.data as data
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Argument parser for command-line execution
 parser = argparse.ArgumentParser(description="VAE for single-cell RNA-seq imputation")
 parser.add_argument("--input_path", type=str, required=True, help="Path to input CSV file")
 parser.add_argument("--output_path", type=str, required=True, help="Path to save imputed output CSV file")
+parser.add_argument("--loss_plot_path", type=str, required=True, help="Path to save loss plot PDF file")
 parser.add_argument("--epochs", type=int, default=50, help="Number of training epochs")
 parser.add_argument("--batch_size", type=int, default=64, help="Batch size for training")
 parser.add_argument("--lr", type=float, default=0.0001, help="Learning rate")
@@ -19,8 +21,6 @@ args = parser.parse_args()
 print(f"Loading data from {args.input_path}...")
 original_data = pd.read_csv(args.input_path, index_col=0)
 transformed_data = np.log1p(original_data)  # Apply log1p transformation
-
-# Convert data to PyTorch tensor
 input_data = torch.tensor(transformed_data.values, dtype=torch.float32)
 
 # Step 2: Create a PyTorch DataLoader
@@ -88,6 +88,8 @@ optimizer = optim.Adam(model.parameters(), lr=args.lr)
 # Step 6: Train the model
 def train(model, optimizer, train_loader, epochs, device):
     model.train()
+    loss_history = []
+
     for epoch in range(epochs):
         overall_loss = 0
         for batch_idx, (x,) in enumerate(train_loader):
@@ -100,13 +102,26 @@ def train(model, optimizer, train_loader, epochs, device):
             overall_loss += loss.item()
         
         average_loss = overall_loss / len(train_loader.dataset)
+        loss_history.append(average_loss)
         print(f"Epoch {epoch + 1}/{epochs}, Average Loss: {average_loss:.4f}")
+
+    return loss_history
 
 # Train the model
 print("Training VAE...")
-train(model, optimizer, train_loader, args.epochs, device)
+loss_history = train(model, optimizer, train_loader, args.epochs, device)
 
-# Step 7: Reconstruct the data
+# Step 7: Plot and save loss
+plt.figure(figsize=(8, 5))
+plt.plot(range(1, args.epochs + 1), loss_history, marker='o', linestyle='-')
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.title("Training Loss over Epochs")
+plt.grid(True)
+plt.savefig(args.loss_plot_path)
+print(f"Loss plot saved to {args.loss_plot_path}")
+
+# Step 8: Reconstruct the data
 print("Reconstructing data...")
 model.eval()
 with torch.no_grad():
