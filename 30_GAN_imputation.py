@@ -59,7 +59,7 @@ class Discriminator(nn.Module):
             nn.Linear(hidden_dim, hidden_dim // 2),
             nn.LeakyReLU(0.2),
             nn.Linear(hidden_dim // 2, 1),
-            nn.Sigmoid()  # Binary classification (real vs. fake)
+            nn.Sigmoid()  
         )
 
     def forward(self, x):
