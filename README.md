@@ -40,20 +40,20 @@ pip install torch numpy pandas argparse scipy matplotlib
 ### **Step 1: Compute Gene-Gene Correlation (`10_Correlation_comparisons.R`)**
 This script calculates gene-gene correlations using various methods, including Pearson, Spearman, Kendall, Mutual Information, Euclidean Distance, Manhattan Distance, Chebyshev Distance, and CS-CORE. It supports multiple data types (raw read counts, normalized data, and scaled data) and can be applied to different subsets of the dataset: all cells in the sample, cells expressing both genes, or cells expressing either gene 1, gene 2, or both.
 
-### **Run the script**
+#### **Run the script**
 ```bash
 Rscript 10_Correlation_comparisons.R --input_path "path/to/dataset.rds or /path/to/dataset.h5" --gene1 "gene name" --gene2 "gene name"
 ```
 
-### **Arguments**
+#### **Arguments**
 - `--input_path` → Path to the input data (**Seurat RDS file** or **HDF5 file**)
 - `--gene1` → The name of Gene 1
 - `--gene2` → The name of Gene 2
 
-### **Output**
+#### **Output**
 - `correlation_results.csv` → File containing the computed correlation values.
 
-### **Example with Custom Parameters**
+#### **Example with Custom Parameters**
 ```bash
 Rscript 10_Correlation_comparisons.R --dataset_path "filtered_feature_bc_matrix.h5" --gene1 "GFP" --gene2 "gene:AT5G14750"
 ```
@@ -61,21 +61,21 @@ Rscript 10_Correlation_comparisons.R --dataset_path "filtered_feature_bc_matrix.
 ### **Step 2: Perform Pseudobulk Correlation Analysis (`20_PseudoBulk_correlation.R`)**
 This script aggregates single-cell data into pseudo-bulk profiles by computing the average gene expression across all cells in each cluster. It measures the correlation between the average expression levels of the selected genes across clusters.
 
-### **Run the script**
+#### **Run the script**
 ```bash
 Rscript 20_PseudoBulk_correlation.R --input_path "path/to/dataset.rds" --gene1 "gene name" --gene2 "gene name"
 ```
-### **Arguments**
+#### **Arguments**
 - `--input_path` → Path to the input Seurat object data (**Seurat RDS file**)
 - `--gene1` → The name of Gene 1
 - `--gene2` → The name of Gene 2
 
-### **Output**
+#### **Output**
 - `average_expression.csv` → Contains the average expression values and confidence intervals for all cells in each cluster.
 - `correlation_plot.pdf` → Visualization of the correlation between average gene expression across clusters.
 - `average_gene_expression_across_clusters.pdf` → Plot displaying the average gene expression across different clusters.
 
-### **Example with Custom Parameters**
+#### **Example with Custom Parameters**
 ```bash
 Rscript 20_PseudoBulk_correlation.R --SeuratObj_path "Seurat_Obj_CO2_allcells.rds" --gene1 "GFP" --gene2 "gene:AT1G09750"
 ```
@@ -84,11 +84,11 @@ Rscript 20_PseudoBulk_correlation.R --SeuratObj_path "Seurat_Obj_CO2_allcells.rd
 ### *3.1 Impute Data Using Variational Autoencoder (`30_VAE_imputation.py`)*
 This script uses a **Variational Autoencoder (VAE)** to impute missing values in single-cell RNA-seq data.
 
-### **Run the script**
+#### **Run the script**
 ```bash
 python 30_VAE_imputation.py --input_path "path/to/readcount.csv" --output_path "path/to/output.csv" --loss_plot_path "path/to/loss.pdf"
 ```
-### **Arguments**
+#### **Arguments**
 - `--input_path` → Path to the expression matrix containing read count data (**CSV format**)
 - `--output_path` → Path to save the imputed dataset
 - `--loss_plot_path` →  Path to save the training loss graph
@@ -96,7 +96,7 @@ python 30_VAE_imputation.py --input_path "path/to/readcount.csv" --output_path "
 - `--batch_size` *(optional)* → Batch size for training (**default: 64**)
 - `--lr` *(optional)* → Learning rate (**default: 0.0001**)
 
-### **Example with Custom Parameters**
+#### **Example with Custom Parameters**
 ```bash
 python 30_VAE_imputation.py --input_path "WER_count.csv" --output_path "WER_VAE_impute.csv" --loss_plot_path "WER_VAE_loss.pdf" --epochs 50 --batch_size 64 --lr 0.0001
 ```
@@ -104,11 +104,11 @@ python 30_VAE_imputation.py --input_path "WER_count.csv" --output_path "WER_VAE_
 ### *3.2: Impute Data Using Generative Adversarial Networks (`30_GAN_imputation.py`)*
 This script uses a **Generative Adversarial Networks (GAN)** to impute missing values in single-cell RNA-seq data.
 
-### **Run the script**
+#### **Run the script**
 ```bash
 python 30_GAN_imputation.py --input_path "path/to/readcount.csv" --output_path "path/to/output.csv" --loss_plot_path "path/to/loss.pdf"
 ```
-### **Arguments**
+#### **Arguments**
 - `--input_path` → Path to the expression matrix containing read count data (**CSV format**)
 - `--output_path` → Path to save the imputed dataset
 - `--loss_plot_path` →  Path to save the training loss graph
@@ -117,7 +117,7 @@ python 30_GAN_imputation.py --input_path "path/to/readcount.csv" --output_path "
 - `--lr_g` *(optional)* → Learning rate of Generator (**default: 0.0001**)
 - `--lr_d` *(optional)* → Learning rate of Discriminator (**default: 0.00001**)
 - 
-### **Example with Custom Parameters**
+#### **Example with Custom Parameters**
 ```bash
 python 35_GAN_imputation.py --input_path "WER_count.csv" --output_path "WER_GAN_impute.csv" --loss_plot_path "WER_GAN_loss.pdf" --epochs 50 --batch_size 64 --lr_g 0.0001 --lr_d 0.00001
 ```
@@ -125,11 +125,11 @@ python 35_GAN_imputation.py --input_path "WER_count.csv" --output_path "WER_GAN_
 ### *3.3: Impute Data Using Autoencoder (`30_AE_imputation.py`)*
 This script uses a **Autoencoder (AE)** to impute missing values in single-cell RNA-seq data.
 
-### **Run the script**
+#### **Run the script**
 ```bash
 python 30_AE_imputation.py --input_path "path/to/readcount.csv" --output_path "path/to/output.csv" --loss_plot_path "path/to/loss.pdf"
 ```
-### **Arguments**
+#### **Arguments**
 - `--input_path` → Path to the expression matrix containing read count data (**CSV format**)
 - `--output_path` → Path to save the imputed dataset
 - `--loss_plot_path` →  Path to save the training loss graph
@@ -137,7 +137,7 @@ python 30_AE_imputation.py --input_path "path/to/readcount.csv" --output_path "p
 - `--batch_size` *(optional)* → Batch size for training (**default: 64**)
 - `--lr` *(optional)* → Learning rate (**default: 0.0001**)
 
-### **Example with Custom Parameters**
+#### **Example with Custom Parameters**
 ```bash
 python 30_AE_imputation.py --input_path "WER_count.csv" --output_path "WER_AE_impute.csv" --loss_plot_path "WER_AE_loss.pdf" --epochs 50 --batch_size 64 --lr 0.0001
 ```
@@ -145,7 +145,7 @@ python 30_AE_imputation.py --input_path "WER_count.csv" --output_path "WER_AE_im
 ### **Step 4: TF-Target Gene Correlations (`40_TFtargetgene_correlation.py`)**
 This script computes pairwise correlations among known target genes for each transcription factor (TF) in both the original and imputed datasets.
 
-### **Run the script**
+#### **Run the script**
 ```bash
 python 40_TFtargetgene_correlation.py \
     --original_data "path/to/original_data_readcount.csv" \
@@ -155,7 +155,8 @@ python 40_TFtargetgene_correlation.py \
     --correlation_method pearson \
     --output_file "path/to/output.csv"
 ```
-### **Arguments**
+
+#### **Arguments**
 - `--original_data` → Path to the original read count data (**CSV format**)
 - `--imputed_data` → Path to the imputed dataset generated in Step 3 or its output (**CSV format**)
 - `--tf_target_data` → Path to the transcription factor (TF) target gene file (**CSV format**)
@@ -163,7 +164,7 @@ python 40_TFtargetgene_correlation.py \
 - `--correlation_method` *(optional)* → Correlation method to use. Choices: `pearson`, `spearman`, `kendall`
 - `--output_file` →  Path to save the computed correlation results (**CSV format**)
 
-### **Example with Custom Parameters**
+#### **Example with Custom Parameters**
 ```bash
 python 40_TFtargetgene_correlation.py \
 --original_data "WER_count.csv" \
@@ -177,22 +178,22 @@ python 40_TFtargetgene_correlation.py \
 ### **Step 5: Visualization of TF-Target Gene Correlations (`50_Visualization_TF_original_vs_imputed_data.R`)**
 This script compares the correlation of target genes for each transcription factor (TF) between the original and imputed data or generates plots based on the output from Step 4.
 
-### **Run the script**
+#### **Run the script**
 ```bash
 Rscript 50_Visualization_TF_original_vs_imputed_data.R --input_path "path/to/TF_correlation.csv" 
 ```
-### **Arguments**
+#### **Arguments**
 - `--input_path` → Path to the transcription factor correlation (**CSV format**)
 
-### **Output**
+#### **Output**
 - `lineplot.pdf` → . The line plot displays the average correlation of target genes for each TF in the original and imputed data.
 - `Expression_correlation.pdf` → The scatter plots with fitted lines illustrate the relationship between gene expression and correlation for each TF.
 - `Boxplot_expression_Ori_VS_Imputed.pdf` → The boxplot compares the average target gene expression for each TF.
 - `Boxplot_correlation_Ori_VS_Imputed.pdf` → The boxplot compares the average target gene correlation for each TF.
 
-### **Example with Custom Parameters**
+#### **Example with Custom Parameters**
 ```bash
-Rscript 55_Visualization_TF_original_vs_imputed_data.R --input_path "TF_correlation_expression_comparison.csv" 
+Rscript 50_Visualization_TF_original_vs_imputed_data.R --input_path "TF_correlation_expression_comparison.csv" 
 ```
 
 
