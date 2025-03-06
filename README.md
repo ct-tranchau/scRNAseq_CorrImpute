@@ -43,7 +43,7 @@ This script calculates and ranks the correlation of all genes with a specified g
 
 #### **Run the script**
 ```bash
-Rscript Rank_gene_correlation.R --input_path "path/to/dataset.rds" --gene "gene_name" --output_path "path/to/correlation_rank.csv"
+Rscript 00_Rank_genes_correlation.R --input_path "path/to/dataset.rds" --gene "gene_name" --output_path "path/to/correlation_rank.csv"
 ```
 #### Arguments
 - `--input_path` → Path to the input data (**Seurat RDS file**)
@@ -54,7 +54,7 @@ Rscript Rank_gene_correlation.R --input_path "path/to/dataset.rds" --gene "gene_
 
 #### Example with Custom Parameters
 ```bash
-Rscript Rank_gene_correlation.R --input_path "Seurat_Obj_CO2_allcells.rds" --data_type "counts" --correlation_method "spearman" --gene "gene:AT5G14750" --output_path "correlation_rank.csv"
+Rscript 00_Rank_genes_correlation.R --input_path "Seurat_Obj_CO2_allcells.rds" --data_type "counts" --correlation_method "pearson" --gene "gene:AT5G14750" --output_path "correlation_rank.csv"
 ```
 
 
