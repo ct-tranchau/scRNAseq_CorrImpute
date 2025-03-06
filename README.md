@@ -10,7 +10,7 @@ The pipeline consists of four main steps:
 3. **Impute missing values** \
    3.1 *Variational Autoencoder (VAE)* (`30_VAE_imputation.py`) \
    3.2 *Generative adversarial network (GAN)* (`30_GAN_imputation.py`) \
-   3.3 *Autoencoder (AE)* (`30_AE_imputation.py`) \
+   3.3 *Autoencoder (AE)* (`30_AE_imputation.py`) 
 4. **TF-Target Gene Correlations** (`40_TFtargetgene_correlation.py`)
 5. **Visualization of TF-Target Gene Correlations** (`50_Visualization_TF_original_vs_imputed_data.R`)
 
