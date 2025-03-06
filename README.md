@@ -4,6 +4,7 @@ Single-cell RNA sequencing (scRNA-seq) enables the exploration of transcriptomic
 
 ## Pipeline Overview
 The pipeline consists of five main steps:
+
 0. **Rank gene correlation** (`00_Rank_genes_correlation.R`)
 1. **Compute gene-gene correlation using different methods** (`10_Correlation_comparisons.R`)
 2. **Perform Pseudo bulk correlation analysis across all clusters** (`20_PseudoBulk_correlation.R`)
@@ -36,6 +37,25 @@ pip install torch numpy pandas argparse scipy matplotlib
 ```
 
 ## Usage
+
+### **Step 0: Gene Correlation Ranking (`00_Rank_genes_correlation.R`)**
+This script calculates and ranks the correlation of all genes with a specified gene of interest in a Seurat object. It extracts gene expression data, computes correlation coefficients using the specified method (Pearson, Spearman, or Kendall), and outputs a ranked list of genes from highest to lowest correlation.
+
+#### **Run the script**
+```bash
+Rscript Rank_gene_correlation.R --input_path "path/to/dataset.rds" --gene "gene_name" --output_path "path/to/correlation_rank.csv"
+```
+#### Arguments
+- `--input_path` → Path to the input data (**Seurat RDS file**)
+- `--data_type` *(optional)* → Type of data to extract from the Seurat object (counts, data, or scale.data) (**default: `"counts"`**)
+- `--correlation_method` *(optional)* → Correlation method to use (pearson, spearman, or kendall) (**default: `"pearson"`**)
+- `--gene` → The gene of interest to compute correlation against.
+- `--output_path` → Path to save the output correlation results.
+
+#### Example with Custom Parameters
+```bash
+Rscript Rank_gene_correlation.R --input_path "Seurat_Obj_CO2_allcells.rds" --data_type "counts" --correlation_method "spearman" --gene "gene:AT5G14750" --output_path "correlation_rank.csv"
+```
 
 
 ### **Step 1: Compute Gene-Gene Correlation (`10_Correlation_comparisons.R`)**
