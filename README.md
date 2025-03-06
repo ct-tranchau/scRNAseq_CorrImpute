@@ -7,10 +7,10 @@ The pipeline consists of four main steps:
 
 1. **Compute gene-gene correlation using different methods** (`10_Correlation_comparisons.R`)
 2. **Perform Pseudo bulk correlation analysis across all clusters** (`20_PseudoBulk_correlation.R`)
-3. **Impute missing values**
-   3.1 *Variational Autoencoder (VAE)* (`30_VAE_imputation.py`)
-   3.2 *Generative adversarial network (GAN)* (`30_GAN_imputation.py`)
-   3.3 *Autoencoder (AE)* (`30_AE_imputation.py`)
+3. **Impute missing values** \
+   3.1 *Variational Autoencoder (VAE)* (`30_VAE_imputation.py`) \
+   3.2 *Generative adversarial network (GAN)* (`30_GAN_imputation.py`) \
+   3.3 *Autoencoder (AE)* (`30_AE_imputation.py`) \
 4. **TF-Target Gene Correlations** (`40_TFtargetgene_correlation.py`)
 5. **Visualization of TF-Target Gene Correlations** (`50_Visualization_TF_original_vs_imputed_data.R`)
 
@@ -186,6 +186,7 @@ Rscript 50_Visualization_TF_original_vs_imputed_data.R --input_path "path/to/TF_
 - `--input_path` → Path to the transcription factor correlation (**CSV format**)
 
 #### **Output**
+The output will be saved in the "Visualization" folder.
 - `lineplot.pdf` → . The line plot displays the average correlation of target genes for each TF in the original and imputed data.
 - `Expression_correlation.pdf` → The scatter plots with fitted lines illustrate the relationship between gene expression and correlation for each TF.
 - `Boxplot_expression_Ori_VS_Imputed.pdf` → The boxplot compares the average target gene expression for each TF.
