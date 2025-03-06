@@ -13,7 +13,7 @@ library(infotheo) # for Mutual information
 ###############################
 # Define command-line arguments
 option_list <- list(
-  make_option(c("--dataset_path"), type = "character", default = NULL, help = "Path to dataset (Seurat object .rds)"),
+  make_option(c("--input_path"), type = "character", default = NULL, help = "Path to dataset (Seurat object .rds)"),
   make_option(c("--gene1"), type = "character", default = NULL, help = "First gene name"),
   make_option(c("--gene2"), type = "character", default = NULL, help = "Second gene name")
 )
@@ -23,24 +23,24 @@ opt_parser <- OptionParser(option_list = option_list)
 opt <- parse_args(opt_parser)
 
 # Validate inputs
-if (is.null(opt$dataset_path) || is.null(opt$gene1) || is.null(opt$gene2)) {
+if (is.null(opt$input_path) || is.null(opt$gene1) || is.null(opt$gene2)) {
   print_help(opt_parser)
-  stop("Missing required arguments: --dataset_path, --gene1, --gene2")
+  stop("Missing required arguments: --input_path, --gene1, --gene2")
 }
 
 # Assign arguments to variables
-dataset_path <- opt$dataset_path
+input_path <- opt$input_path
 gene1 <- opt$gene1
 gene2 <- opt$gene2
 ##################################
 
 # Check file type and load dataset
 cat("\nLoading dataset...\n")
-if (grepl("\\.h5$", dataset_path)) {
-  matrix <- Read10X_h5(dataset_path)
+if (grepl("\\.h5$", input_path)) {
+  matrix <- Read10X_h5(input_path)
   Seu_obj <- CreateSeuratObject(matrix)
-} else if (grepl("\\.rds$", dataset_path)) {
-  data_file <- readRDS(dataset_path)
+} else if (grepl("\\.rds$", input_path)) {
+  data_file <- readRDS(input_path)
   Seu_obj <- CreateSeuratObject(data_file)
 } else {
   stop("\nError: Dataset file must be .h5 or .rds\n")
