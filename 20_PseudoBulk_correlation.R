@@ -8,7 +8,7 @@ library(tidyverse)
 
 # Define command-line arguments
 option_list <- list(
-  make_option(c("--SeuratObj_path"), type = "character", default = NULL, help = "Path to Seurat object (.rds)"),
+  make_option(c("--input_path"), type = "character", default = NULL, help = "Path to Seurat object (.rds)"),
   make_option(c("--gene1"), type = "character", default = NULL, help = "First gene name"),
   make_option(c("--gene2"), type = "character", default = NULL, help = "Second gene name")
 )
@@ -18,20 +18,20 @@ opt_parser <- OptionParser(option_list = option_list)
 opt <- parse_args(opt_parser)
 
 # Validate inputs
-if (is.null(opt$SeuratObj_path) || is.null(opt$gene1) || is.null(opt$gene2)) {
+if (is.null(opt$input_path) || is.null(opt$gene1) || is.null(opt$gene2)) {
   print_help(opt_parser)
-  stop("Missing required arguments: --SeuratObj_path, --gene1, --gene2")
+  stop("Missing required arguments: --input_path, --gene1, --gene2")
 }
 
 # Assign arguments to variables
-SeuratObj_path <- opt$SeuratObj_path
+input_path <- opt$input_path
 gene1 <- opt$gene1
 gene2 <- opt$gene2
 
 
 # Load Seurat object
 cat("Loading Seurat object...\n")
-Obj <- readRDS(SeuratObj_path)
+Obj <- readRDS(input_path)
 
 # Extract count data
 counts <- GetAssayData(Obj, layer = "counts")
