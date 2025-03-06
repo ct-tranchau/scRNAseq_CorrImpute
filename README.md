@@ -4,7 +4,7 @@ Single-cell RNA sequencing (scRNA-seq) enables the exploration of transcriptomic
 
 ## Pipeline Overview
 The pipeline consists of five main steps:
-
+0. **Rank gene correlation** (`00_Rank_genes_correlation.R`)
 1. **Compute gene-gene correlation using different methods** (`10_Correlation_comparisons.R`)
 2. **Perform Pseudo bulk correlation analysis across all clusters** (`20_PseudoBulk_correlation.R`)
 3. **Impute missing values** \
@@ -36,6 +36,7 @@ pip install torch numpy pandas argparse scipy matplotlib
 ```
 
 ## Usage
+
 
 ### **Step 1: Compute Gene-Gene Correlation (`10_Correlation_comparisons.R`)**
 This script calculates gene-gene correlations using various methods, including Pearson, Spearman, Kendall, Mutual Information, Euclidean Distance, Manhattan Distance, Chebyshev Distance, and CS-CORE. It supports multiple data types (raw read counts, normalized data, and scaled data) and can be applied to different subsets of the dataset: all cells in the sample, cells expressing both genes, or cells expressing either gene 1, gene 2, or both.
