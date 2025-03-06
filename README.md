@@ -38,7 +38,7 @@ pip install torch numpy pandas argparse scipy matplotlib
 
 ## Usage
 
-### **Step 0: Gene Correlation Ranking (`00_Rank_genes_correlation.R`)**
+### **Step 0: Rank gene correlation (`00_Rank_genes_correlation.R`)**
 This script calculates and ranks the correlation of all genes with a specified gene of interest in a Seurat object. It extracts gene expression data, computes correlation coefficients using the specified method (Pearson, Spearman, or Kendall), and outputs a ranked list of genes from highest to lowest correlation.
 
 #### **Run the script**
