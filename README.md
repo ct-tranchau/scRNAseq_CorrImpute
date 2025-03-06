@@ -55,7 +55,7 @@ Rscript 10_Correlation_comparisons.R --input_path "path/to/dataset.rds or /path/
 
 #### **Example with Custom Parameters**
 ```bash
-Rscript 10_Correlation_comparisons.R --dataset_path "filtered_feature_bc_matrix.h5" --gene1 "GFP" --gene2 "gene:AT5G14750"
+Rscript 10_Correlation_comparisons.R --input_path "filtered_feature_bc_matrix.h5" --gene1 "GFP" --gene2 "gene:AT5G14750"
 ```
 
 ### **Step 2: Perform Pseudobulk Correlation Analysis (`20_PseudoBulk_correlation.R`)**
@@ -77,7 +77,7 @@ Rscript 20_PseudoBulk_correlation.R --input_path "path/to/dataset.rds" --gene1 "
 
 #### **Example with Custom Parameters**
 ```bash
-Rscript 20_PseudoBulk_correlation.R --SeuratObj_path "Seurat_Obj_CO2_allcells.rds" --gene1 "GFP" --gene2 "gene:AT1G09750"
+Rscript 20_PseudoBulk_correlation.R --input_path "Seurat_Obj_CO2_allcells.rds" --gene1 "GFP" --gene2 "gene:AT1G09750"
 ```
 ### **Step 3: Impute missing values of single cell RNA-seq data**
 
@@ -119,7 +119,7 @@ python 30_GAN_imputation.py --input_path "path/to/readcount.csv" --output_path "
 - 
 #### **Example with Custom Parameters**
 ```bash
-python 35_GAN_imputation.py --input_path "WER_count.csv" --output_path "WER_GAN_impute.csv" --loss_plot_path "WER_GAN_loss.pdf" --epochs 50 --batch_size 64 --lr_g 0.0001 --lr_d 0.00001
+python 30_GAN_imputation.py --input_path "WER_count.csv" --output_path "WER_GAN_impute.csv" --loss_plot_path "WER_GAN_loss.pdf" --epochs 50 --batch_size 64 --lr_g 0.0001 --lr_d 0.00001
 ```
 
 ### *3.3: Impute Data Using Autoencoder (`30_AE_imputation.py`)*
