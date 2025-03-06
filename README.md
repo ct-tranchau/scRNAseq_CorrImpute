@@ -137,7 +137,7 @@ python 30_GAN_imputation.py --input_path "path/to/readcount.csv" --output_path "
 - `--batch_size` *(optional)* → Batch size for training (**default: 64**)
 - `--lr_g` *(optional)* → Learning rate of Generator (**default: 0.0001**)
 - `--lr_d` *(optional)* → Learning rate of Discriminator (**default: 0.00001**)
-- 
+
 #### **Example with Custom Parameters**
 ```bash
 python 30_GAN_imputation.py --input_path "WER_count.csv" --output_path "WER_GAN_impute.csv" --loss_plot_path "WER_GAN_loss.pdf" --epochs 50 --batch_size 64 --lr_g 0.0001 --lr_d 0.00001
@@ -223,11 +223,12 @@ Rscript 50_Visualization_TF_original_vs_imputed_data.R --input_path "TF_correlat
 
 | Step  | Output File                | Description                          |
 |-------|----------------------------|--------------------------------------|
-| **1** | `correlation_results.csv` | Gene-gene correlation matrix        |
-| **2** | `average_expression.csv` | PseudoBulk correlation results      |
-| **3** | `VAE_impute.csv` `GAN_impute.csv` `AE_impute.csv` | VAE-imputed, GAN-imputed, AE-imputed expression matrix       |
-| **4** | `TF_correlation_expression_comparison.csv` | Average correlation of all target genes in each TF    |
-| **5** | `Lineplot.pdf` `Expression_correlation.pdf` `Boxplot_expression_Ori_VS_Imputed.pdf` `Boxplot_correlation_Ori_VS_Imputed.pdf`| Compare the correlation of target genes for each TF in the original and imputed data  |
+| **Step0** | `correlation_rank.csv` | Rank genes by correlation     |
+| **Step1** | `correlation_results.csv` | Gene-gene correlation matrix        |
+| **Step2** | `average_expression.csv` | PseudoBulk correlation results      |
+| **Step3** | `VAE_impute.csv` `GAN_impute.csv` `AE_impute.csv` | VAE-imputed, GAN-imputed, AE-imputed expression matrix       |
+| **Step4** | `TF_correlation_expression_comparison.csv` | Average correlation of all target genes in each TF    |
+| **Step5** | `Lineplot.pdf` `Expression_correlation.pdf` `Boxplot_expression_Ori_VS_Imputed.pdf` `Boxplot_correlation_Ori_VS_Imputed.pdf`| Compare the correlation of target genes for each TF in the original and imputed data  |
 
 ## **License**
 This project is licensed under the **MIT License**.
