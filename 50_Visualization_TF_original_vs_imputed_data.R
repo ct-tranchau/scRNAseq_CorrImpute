@@ -50,7 +50,7 @@ lineplot <- ggplot(data_long, aes(x = TF, y = Value, group = Data_type, color = 
         axis.text.y = element_text(size = 12)) +
   scale_color_manual(values = c("TF_ori_cor" = "purple3", "TF_imputed_cor" = "orange"))
 
-pdf(file.path(output_dir, "lineplot.pdf"), width = 12, height = 4)
+pdf(file.path(output_dir, "Lineplot.pdf"), width = 12, height = 4)
 print(lineplot)
 dev.off()
 
