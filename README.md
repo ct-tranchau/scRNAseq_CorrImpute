@@ -3,7 +3,7 @@
 Single-cell RNA sequencing (scRNA-seq) enables the exploration of transcriptomic heterogeneity at the individual cell level, facilitating the identification of distinct cell types, rare populations, and dynamic gene expression patterns over time. This technique has advanced plant biology by enabling cross-species comparisons and uncovering gene regulatory networks. While gene co-expression networks are essential for understanding these networks, commonly used correlation methods have primarily been applied to microarray and bulk RNA-seq datasets, with limited validation in single-cell contexts. This study uses an Arabidopsis scRNA-seq dataset to evaluate the performance of various correlation methods in comparing promoter-reporter genes with their native counterparts, addressing challenges such as zero-inflation and demonstrating the benefits of pseudo-bulk analysis and imputation techniques for improving correlation accuracy.
 
 ## Pipeline Overview
-The pipeline consists of four main steps:
+The pipeline consists of five main steps:
 
 1. **Compute gene-gene correlation using different methods** (`10_Correlation_comparisons.R`)
 2. **Perform Pseudo bulk correlation analysis across all clusters** (`20_PseudoBulk_correlation.R`)
