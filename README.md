@@ -206,10 +206,7 @@ Rscript 55_Visualization_TF_original_vs_imputed_data.R --input_path "TF_correlat
 | **Step 3** | `GAN_impute.csv`         | GAN-imputed expression matrix       |
 | **Step 3** | `AE_impute.csv`         | AE-imputed expression matrix       |
 | **Step 4** | `TF_correlation_expression_comparison.csv` | Average correlation of all target genes in each TF    |
-| **Step 5** | `lineplot.pdf` | Compare the correlation of target genes for each TF in the original and imputed data  |
-| **Step 5** | `Expression_correlation.pdf` |     |
-| **Step 5** | `Boxplot_expression_Ori_VS_Imputed.pdf` |   |
-| **Step 5** | `Boxplot_correlation_Ori_VS_Imputed.pdf` |     |
+| **Step 5** | `lineplot.pdf` `Expression_correlation.pdf` `Boxplot_expression_Ori_VS_Imputed.pdf` `Boxplot_correlation_Ori_VS_Imputed.pdf`| Compare the correlation of target genes for each TF in the original and imputed data  |
 
 ## **License**
 This project is licensed under the **MIT License**.
