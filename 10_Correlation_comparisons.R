@@ -6,7 +6,7 @@ library(Seurat)
 library(tidyverse)
 library(hdf5r) # for loading the h5 file
 library(CSCORE) # for cs-core
-library(sctransform) # for sctransform
+#library(sctransform) # for sctransform
 library(WGCNA) # for bicor
 library(infotheo) # for Mutual information
 
