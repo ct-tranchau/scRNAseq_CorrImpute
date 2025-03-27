@@ -22,13 +22,13 @@ The pipeline consists of five main steps:
 - R (for correlation analysis)
 - Python 3.7+ (for deep learning-based imputation)
 - Dependencies:
-  - R packages: `tidyverse`,`dplyr`,  `Seurat`, `WGCNA`, `infotheo`, `CSCORE`, `hdf5r`, `optparse`, `ggplot2`, `reshape2`, `rstatix`, `ggpubr`
-  - Python packages: `torch`, `numpy`, `pandas`, `argparse`, `scipy`, `matplotlib`
+  - R packages: `tidyselect_1.2.1`,`dplyr_1.1.4`,  `Seurat_5.2.1`, `WGCNA_1.73`, `infotheo_1.2.0.1`, `CSCORE_0.0.0.9000`, `optparse_1.7.5`, `ggplot2_3.5.1`, `reshape2_1.4.4`, `rstatix_0.7.2`, `ggpubr_0.6.0`
+  - Python packages: `torch_2.3.1`, `numpy_1.26.4`, `pandas_2.0.3`, `argparse_1.1`, `scipy_1.13.1`, `matplotlib_3.8.4`
 
 ### Setup
 #### Install R dependencies
 ```r
-install.packages(c("tidyverse", "dplyr", "Seurat", "WGCNA", "infotheo", "CSCORE", "hdf5r", "optparse", "ggplot2", "reshape2", "rstatix", "ggpubr"))
+install.packages(c("tidyverse", "dplyr", "Seurat", "WGCNA", "infotheo", "CSCORE", "optparse", "ggplot2", "reshape2", "rstatix", "ggpubr"))
 ```
 
 #### Install Python dependencies
