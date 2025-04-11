@@ -7,20 +7,19 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Argument parser for command-line execution
 parser = argparse.ArgumentParser(description="VAE for single-cell RNA-seq imputation")
 parser.add_argument("--input_path", type=str, required=True, help="Path to input CSV file")
 parser.add_argument("--output_path", type=str, required=True, help="Path to save imputed output CSV file")
 parser.add_argument("--loss_plot_path", type=str, required=True, help="Path to save loss plot PDF file")
 parser.add_argument("--epochs", type=int, default=50, help="Number of training epochs")
 parser.add_argument("--batch_size", type=int, default=64, help="Batch size for training")
-parser.add_argument("--lr", type=float, default=0.0001, help="Learning rate")
+parser.add_argument("--lr", type=float, default=0.00005, help="Learning rate")  # slightly reduced
 args = parser.parse_args()
 
 # Step 1: Load and preprocess the single-cell RNA-seq data
 print(f"Loading data from {args.input_path}...")
 original_data = pd.read_csv(args.input_path, index_col=0)
-transformed_data = np.log1p(original_data)  # Apply log1p transformation
+transformed_data = np.log1p(original_data)  # log1p transformation
 input_data = torch.tensor(transformed_data.values, dtype=torch.float32)
 
 # Step 2: Create a PyTorch DataLoader
@@ -49,7 +48,7 @@ class scVAE(nn.Module):
             nn.Linear(latent_dim, hidden_dim),
             nn.LeakyReLU(0.2),
             nn.Linear(hidden_dim, input_dim),
-            nn.ReLU()
+            nn.ReLU()  
         )
      
     def encode(self, x):
@@ -73,11 +72,10 @@ class scVAE(nn.Module):
         return x_hat, mean, logvar
 
 # Step 4: Loss function
-def loss_function(x, x_hat, mean, log_var):
-    reproduction_loss = nn.functional.mse_loss(x_hat, x, reduction='none').sum(dim=-1).mean()
-    epsilon = 1e-6
-    KLD = -0.5 * torch.sum(1 + log_var - mean.pow(2) - (log_var + epsilon).exp(), dim=-1).mean()
-    return reproduction_loss + KLD
+def loss_function(x, x_hat, mean, log_var, kl_weight=1.0):
+    reconstruction_loss = nn.functional.mse_loss(x_hat, x, reduction='none').sum(dim=-1).mean()
+    KLD = -0.5 * torch.sum(1 + log_var - mean.pow(2) - log_var.exp(), dim=-1).mean()
+    return reconstruction_loss + kl_weight * KLD
 
 # Step 5: Initialize the model, optimizer, and device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -92,12 +90,15 @@ def train(model, optimizer, train_loader, epochs, device):
 
     for epoch in range(epochs):
         overall_loss = 0
+        kl_weight = min(1.0, epoch / 10.0)  # KL annealing
+
         for batch_idx, (x,) in enumerate(train_loader):
             x = x.to(device)
             optimizer.zero_grad()
             x_hat, mean, log_var = model(x)
-            loss = loss_function(x, x_hat, mean, log_var)
+            loss = loss_function(x, x_hat, mean, log_var, kl_weight)
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)  # Optional gradient clipping
             optimizer.step()
             overall_loss += loss.item()
         
@@ -122,7 +123,7 @@ plt.savefig(args.loss_plot_path)
 print(f"Loss plot saved to {args.loss_plot_path}")
 
 # Step 8: Reconstruct the data
-print("Reconstructing data...")
+print("Reconstructing data")
 model.eval()
 with torch.no_grad():
     reconstructed_data, _, _ = model(input_data.to(device))
