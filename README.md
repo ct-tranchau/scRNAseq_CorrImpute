@@ -28,12 +28,16 @@ The pipeline consists of five main steps:
 ### Setup
 #### Install R dependencies
 ```r
-install.packages(c("tidyverse", "dplyr", "Seurat", "WGCNA", "infotheo", "CSCORE", "optparse", "ggplot2", "reshape2", "rstatix", "ggpubr"))
+install.packages(c("tidyselect", "dplyr", "Seurat", "WGCNA", "infotheo", "optparse", "ggplot2", "reshape2", "rstatix", "ggpubr"))
+if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
+devtools::install_github("ChangSuBiostats/CS-CORE")
 ```
 
 #### Install Python dependencies
 ```bash
-pip install torch numpy pandas argparse scipy matplotlib
+conda create -n CorrImpute python=3.7
+conda activate CorrImpute
+pip install torch==2.3.1 numpy==1.26.4 pandas==2.0.3 argparse==1.1 scipy==1.13.1 matplotlib==3.8.4
 ```
 
 ## Usage
@@ -54,7 +58,7 @@ Rscript 00_Rank_genes_correlation.R --input_path "path/to/dataset.rds" --gene "g
 
 #### Example with Custom Parameters
 ```bash
-Rscript 00_Rank_genes_correlation.R --input_path "Seurat_Obj_CO2_allcells.rds" --data_type "counts" --correlation_method "pearson" --gene "gene:AT5G14750" --output_path "correlation_rank.csv"
+Rscript 00_Rank_genes_correlation.R --input_path "Seurat_Obj_WER_wlabels.rds" --data_type "counts" --correlation_method "pearson" --gene "gene:AT5G14750" --output_path "correlation_rank.csv"
 ```
 
 
@@ -76,7 +80,7 @@ Rscript 10_Correlation_comparisons.R --input_path "path/to/dataset.rds or /path/
 
 #### **Example with Custom Parameters**
 ```bash
-Rscript 10_Correlation_comparisons.R --input_path "filtered_feature_bc_matrix.h5" --gene1 "GFP" --gene2 "gene:AT5G14750"
+Rscript 10_Correlation_comparisons.R --input_path "Seurat_Obj_WER_wlabels.rds" --gene1 "GFP" --gene2 "gene:AT5G14750"
 ```
 
 ### **Step 2: Perform Pseudobulk Correlation Analysis (`20_PseudoBulk_correlation.R`)**
@@ -98,7 +102,7 @@ Rscript 20_PseudoBulk_correlation.R --input_path "path/to/dataset.rds" --gene1 "
 
 #### **Example with Custom Parameters**
 ```bash
-Rscript 20_PseudoBulk_correlation.R --input_path "Seurat_Obj_CO2_allcells.rds" --gene1 "GFP" --gene2 "gene:AT1G09750"
+Rscript 20_PseudoBulk_correlation.R --input_path "Seurat_Obj_WER_wlabels.rds" --gene1 "GFP" --gene2 "gene:AT5G14750"
 ```
 ### **Step 3: Impute missing values of single cell RNA-seq data**
 
